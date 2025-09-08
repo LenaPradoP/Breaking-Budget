@@ -9,9 +9,16 @@ from ..models import CustomUser
 """
 edit_user:
 Handles user editing based on permissions:
-- Any user (traveler/admin) editing their own account: can only change password
-- Admin editing another user's account: can edit profile info (username, email, etc.) but NOT password or role
-- Travelers cannot edit other users' accounts (forbidden)
+    - Any user (traveler/admin) editing their own account: can only change password
+    - Admin editing another user's account: can edit profile info (username, email, etc.) but NOT password or role
+    - Travelers cannot edit other users' accounts (forbidden)
+
+update_user:
+Processes form submission for user editing with same permission logic as edit_user:
+    - User editing own account: validates and saves password change, preserves login session
+    - Admin editing other user: validates and saves profile data changes
+    - Travelers editing other accounts: forbidden (403 error)
+Returns to user detail on success, or back to edit form with validation errors
 """
 
 def edit_user(request, pk):
@@ -48,11 +55,13 @@ def update_user(request, pk):
 
     if form.is_valid():
         form.save()
-        update_session_auth_hash(request, form.user)
-        return redirect('users:password_changed', pk=user.pk) #Just to try update_user works. Delete after User Detail is implemented. 
+        
+        if request.user.pk == pk:
+            update_session_auth_hash(request, form.user)
+        
+        return redirect('users:user_detail', pk=user.pk)
     else:
-        return render(request, 'users/edit_user.html', context)
-
-#Just to try update_user works. Delete after User Detail is implemented. 
-def password_changed_success(request, pk):
-    return HttpResponse(f"Password changed successfully for user {pk}!")
+        return render(request, 'users/edit_user.html', {
+            'form': form,
+            'user': user
+        })
