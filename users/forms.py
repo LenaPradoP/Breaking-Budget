@@ -32,3 +32,9 @@ class CustomUserWebCreateForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+class AdminUserEditForm(UserChangeForm):
+    password = None
+    class Meta:
+        model = CustomUser
+        fields = ("username", "email", "first_name", "last_name")
