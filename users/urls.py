@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import LoginView, UpdateView
+from .views import LoginView, CreateView, UpdateView
 
-app_name = 'users' 
+app_name = "users"
 
 urlpatterns = [
     path("login/", LoginView.login_user, name="login"),
@@ -12,4 +12,6 @@ urlpatterns = [
     #Just to try update_user works. Delete after User Detail is implemented. 
     path("<int:pk>/password-changed/", UpdateView.password_changed_success, name="password_changed"),
 
+    path("new/", CreateView.new_user, name="new_user"),
+    path("create/", CreateView.create_user, name="create_user"),
 ]
