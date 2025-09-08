@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import LoginView, DetailView, CreateView
+from .views import LoginView, DetailView, CreateView, ListUsers
 
 app_name = "users"
 
@@ -9,5 +9,5 @@ urlpatterns = [
     path("<int:pk>/", DetailView.user_detail, name="user_detail"),
     path("new/", CreateView.new_user, name="new_user"),
     path("create/", CreateView.create_user, name="create_user"),
-
+    path("list_users/", ListUsers.view_users, name="list_users"),
 ]
