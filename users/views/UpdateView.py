@@ -1,7 +1,8 @@
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from users.forms import AdminUserEditForm
 from ..models import CustomUser
 
@@ -21,6 +22,7 @@ Processes form submission for user editing with same permission logic as edit_us
 Returns to user detail on success, or back to edit form with validation errors
 """
 
+@login_required
 def edit_user(request, pk):
     user = get_object_or_404(CustomUser, pk=pk)
     
@@ -38,6 +40,7 @@ def edit_user(request, pk):
     
     return render(request, 'users/edit_user.html', context)
 
+@login_required
 def update_user(request, pk):
     user = get_object_or_404(CustomUser, pk=pk)
     
