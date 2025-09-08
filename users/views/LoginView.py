@@ -7,7 +7,7 @@ class LoginForm(forms.Form):
     username = forms.CharField(max_length=150)
     password = forms.CharField(widget=forms.PasswordInput)
 
-def login_view(request):
+def login_user(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():

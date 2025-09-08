@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Traveler</title>
+</head>
+<body>
+  <form action="{% url 'users:create_user' %}" method="POST">
+    {% csrf_token %}
+    <p>
+        <label for="{{ form.username.id_for_label }}">Username</label>
+        {{ form.username }} {{ form.username.errors }}
+    </p>
+    <p>
+        <label for="{{ form.email.id_for_label }}">Email</label>
+        {{ form.email }} {{ form.email.errors }}
+    </p>
+    <p>
+        <label for="{{ form.password1.id_for_label }}">Password</label>
+        {{ form.password1 }} {{ form.password1.errors }}
+    </p>
+    <p>
+        <label for="{{ form.password2.id_for_label }}">Confirm password</label>
+        {{ form.password2 }} {{ form.password2.errors }}
+    </p>
+    <button type="submit">Create new Traveler</button>
+    <a href="{% url 'users:home' %}">Cancel</a>
+  </form>
+</body>
+</html>
