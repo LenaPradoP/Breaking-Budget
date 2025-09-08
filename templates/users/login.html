@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head><title>Login</title></head>
+  <body>
+    <h1>Login</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Log in</button>
+    </form>
+
+    {% if form.errors %}
+      <ul style="color: red;">
+        {% for field, errors in form.errors.items %}
+          {% for error in errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </body>
+</html>
