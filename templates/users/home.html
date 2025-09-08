@@ -9,5 +9,6 @@
     {% else %}
       <p>You are not logged in. <a href="{% url 'login' %}">Login here</a></p>
     {% endif %}
+    <a href="{% url 'users:user_detail' user.id %}">View Profile Details</a>
   </body>
 </html>
