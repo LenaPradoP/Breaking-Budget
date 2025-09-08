@@ -18,7 +18,7 @@ def login_user(request):
             )
             if user is not None:
                 login(request, user)
-                return redirect("home") 
+                return redirect("users:home") 
             form.add_error(None, "Invalid username or password")
     else:
         form = LoginForm()
