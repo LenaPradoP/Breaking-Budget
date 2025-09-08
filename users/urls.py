@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import LoginView, DetailView, CreateView
+from .views import LoginView, DetailView, CreateView, UpdateView
 
 app_name = "users"
 
@@ -9,5 +9,6 @@ urlpatterns = [
     path("<int:pk>/", DetailView.user_detail, name="user_detail"),
     path("new/", CreateView.new_user, name="new_user"),
     path("create/", CreateView.create_user, name="create_user"),
-
+    path("<int:pk>/edit/", UpdateView.edit_user, name="edit_user"),
+    path("<int:pk>/update/", UpdateView.update_user, name="update_user"),
 ]
