@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 
 # Simple form for manual login
 class LoginForm(forms.Form):
@@ -9,20 +10,15 @@ class LoginForm(forms.Form):
 
 def login_user(request):
     if request.method == "POST":
-        form = LoginForm(request.POST)
+        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            user = authenticate(
-                request,
-                username=form.cleaned_data["username"],
-                password=form.cleaned_data["password"],
-            )
-            if user is not None:
-                login(request, user)
-                return redirect("users:home") 
-            form.add_error(None, "Invalid username or password")
+            user = form.get_user()
+            login(request, user)
+            return redirect("users:home")
     else:
-        form = LoginForm()
+        form = AuthenticationForm(request)
     return render(request, "users/login.html", {"form": form})
+
 
 def home(request):
     return render(request, "users/home.html")
