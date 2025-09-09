@@ -9,6 +9,7 @@
     <p><strong>Username:</strong> {{ user.username }}</p>
     <p><strong>Email:</strong> {{ user.email }}</p>
     <a href="{% url 'users:home' %}">Return Home</a>
+    <a href="{% url 'users:delete_user' user.pk%}" >Delete</a>
     <a href="{% url 'users:edit_user' user.pk %}">Edit User</a>
   </body>
 </html>
