@@ -21,6 +21,12 @@
           <td>{{ user.username }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.role }}</td>
+          <td>
+          <form method="post" action="{% url 'users:user_detail' user.pk %}">
+            {% csrf_token %}
+            <button type="submit">View Details</button>
+        </form>
+        </td>
         </tr>
       {% empty %}
         <tr>
