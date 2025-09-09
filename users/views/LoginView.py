@@ -3,11 +3,6 @@ from django.contrib.auth import authenticate, login
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 
-# Simple form for manual login
-class LoginForm(forms.Form):
-    username = forms.CharField(max_length=150)
-    password = forms.CharField(widget=forms.PasswordInput)
-
 def login_user(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
