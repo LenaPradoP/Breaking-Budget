@@ -43,13 +43,13 @@ class AdminUserEditForm(UserChangeForm):
 # For admins to filter and order the users list
 class UserFilterForm(forms.Form):
     ROLE_CHOICES = [
-        ('', 'All roles'), 
+        ('', 'Filter by'), 
         ('traveler', 'Traveler'),
         ('admin', 'Admin'),
     ]
     
     ORDER_CHOICES = [
-        ('', 'No specific order'), 
+        ('', 'Order by'), 
         ('role', 'Admins first'),
         ('-role', 'Travelers first'), 
         ('date_joined', 'Older first'),  

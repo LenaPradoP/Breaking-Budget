@@ -15,6 +15,12 @@
         <th>Role</th>
       </tr>
     </thead>
+<form method="get">
+    {{ form.role }}      <!-- Dropdown de roles -->
+    {{ form.order_by }}  <!-- Dropdown de ordenamiento -->
+    <button type="submit">Apply Filters</button>
+</form>
+
     <tbody>
       {% for user in users %}
         <tr>
