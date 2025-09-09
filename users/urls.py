@@ -13,5 +13,5 @@ urlpatterns = [
     path("list/", ListUsers.view_users, name="view_users"),
     path("<int:pk>/edit/", UpdateView.edit_user, name="edit_user"),
     path("<int:pk>/update/", UpdateView.update_user, name="update_user"),
-    path("<int:pk>/", DeleteUser.delete_user, name="delete_user"),
+    path("<int:pk>/delete/", DeleteUser.delete_user, name="delete_user"),
 ]
