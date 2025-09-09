@@ -22,7 +22,5 @@ def user_detail(request, pk):
             }
         return render(request, 'users/detail_view.html', context)
     else:
-        raise PermissionDenied("You are not authorized to see this profile.")
+        raise PermissionDenied
         
-
-

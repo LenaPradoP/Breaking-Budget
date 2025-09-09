@@ -12,14 +12,14 @@ class LoginForm(forms.Form):
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = CustomUser
-        fields = ("username", "email", "username", "role")  
+        fields = ("username", "email", "role")  
 
 
 # Used by the Django admin to edit users
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
-        fields = ("username", "email", "username", "role")  
+        fields = ("username", "email", "role")  
 
 class CustomUserWebCreateForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -32,3 +32,9 @@ class CustomUserWebCreateForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+class AdminUserEditForm(UserChangeForm):
+    password = None
+    class Meta:
+        model = CustomUser
+        fields = ("username", "email", "first_name", "last_name")
