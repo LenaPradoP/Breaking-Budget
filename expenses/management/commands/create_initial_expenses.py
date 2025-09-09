@@ -25,6 +25,7 @@ class Command(BaseCommand):
             {"user": 6, "date": "2025-09-06", "status": "approved", "category": "car",            "amount": "40.00",  "description": "Parking"},
             {"user": 7, "date": "2025-09-01", "status": "pending",  "category": "train",          "amount": "28.00",  "description": "Regional train"},
             {"user": 7, "date": "2025-09-07", "status": "approved", "category": "flight",         "amount": "420.00", "description": "Return flight"},
+            {"user": 7, "date": "2025-09-07", "status": "rejected", "category": "hotel",         "amount": "220.00", "description": "3 nights hotel"},
         ]
 
         created = 0
