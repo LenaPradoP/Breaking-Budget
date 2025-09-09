@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Expenses</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <h1>Expenses</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Amount</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for expense in expenses %}
+        <tr>
+          <td>{{ expense.description }}</td>
+          <td>{{ expense.date }}</td>
+          <td>{{ expense.category }}</td>
+          <td>{{ expense.amount }}</td>
+          <td>{{ expense.status }}</td>
+          <td>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="6">No expenses yet.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  <p><a href="{% url 'users:home' %}">Home</a></p>
+</body>
+</html>
