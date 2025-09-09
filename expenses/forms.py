@@ -21,7 +21,6 @@ class ExpensesFilterForm(forms.Form):
     
     ORDER_CHOICES = [
         ('', 'Order by'), 
-        ('status', 'Approved first'), 
         ('-status', 'Rejected first'), 
         ('amount', 'Less expensive first'),
         ('-amount', 'More expensive first'),

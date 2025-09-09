@@ -18,6 +18,12 @@
         <th>Status</th>
       </tr>
     </thead>
+    <form method="get">
+    {{ form.category }}
+    {{ form.status }}
+    {{ form.order_by }} 
+    <button type="submit">Apply Filters</button>
+</form>
     <tbody>
       {% for expense in expenses %}
         <tr>
