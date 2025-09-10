@@ -34,12 +34,12 @@
             <nav>
                 <ul>
                     {% if user.is_authenticated %}
-                        {% if user.role == 'admin' %}
+                        {% if request.user.role == 'admin' %}
                             <li><a href="{% url 'expenses:list_expenses' %}" class="{% if request.resolver_match.url_name == 'list_expenses' %}active{% endif %}">Expenses</a></li>
                             <li><a href="{% url 'expenses:new_expense' %}" class="{% if request.resolver_match.url_name == 'new_expense' %}active{% endif %}">Add Expense</a></li>
                             <li><a href="{% url 'users:view_users' %}" class="{% if request.resolver_match.url_name == 'view_users' %}active{% endif %}">Travelers</a></li>
                             <li><a href="{% url 'users:new_user' %}" class="{% if request.resolver_match.url_name == 'new_user' %}active{% endif %}">Add Traveler</a></li>
-                        {% elif user.role == 'user' %}
+                        {% elif request.user.role == 'user' %}
                             <li><a href="{% url 'expenses:list_expenses' %}" class="{% if request.resolver_match.url_name == 'list_expenses' %}active{% endif %}">My Expenses</a></li>
                             <li><a href="{% url 'expenses:new_expense' %}" class="{% if request.resolver_match.url_name == 'new_expense' %}active{% endif %}">Add Expense</a></li>
                         {% endif %}
