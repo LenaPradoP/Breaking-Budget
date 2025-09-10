@@ -6,7 +6,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
+      <form method="post" action="{% url 'users:logout' %}">
+        {% csrf_token %}
+        <button type="submit">Log out</button>
+      </form>
+
+      <form method="post" action="{% url 'users:user_detail' user.id %}">
+        {% csrf_token %}
+        <button type="submit">View Profile</button>
+      </form>
+
   <h1>Expenses</h1>
+
+  <!-- Flash messages -->
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li style="color: red;">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <!-- Filters (GET) -->
+  <form method="get">
+    {{ form.category }}
+    {{ form.status }}
+    {{ form.order_by }}
+    <button type="submit">Apply Filters</button>
+  </form>
 
   <table>
     <thead>
@@ -16,23 +43,22 @@
         <th>Category</th>
         <th>Amount</th>
         <th>Status</th>
+        <th>Actions</th>
       </tr>
     </thead>
-    <form method="get">
-    {{ form.category }}
-    {{ form.status }}
-    {{ form.order_by }} 
-    <button type="submit">Apply Filters</button>
-</form>
     <tbody>
       {% for expense in expenses %}
         <tr>
           <td>{{ expense.description }}</td>
-          <td>{{ expense.date }}</td>
+          <td>{{ expense.date|date:"SHORT_DATE_FORMAT" }}</td>
           <td>{{ expense.category }}</td>
           <td>{{ expense.amount }}</td>
           <td>{{ expense.status }}</td>
           <td>
+            <form method="post" action="{% url 'expenses:delete_expense' expense.pk %}">
+              {% csrf_token %}
+              <button type="submit">Delete</button>
+            </form>
           </td>
         </tr>
       {% empty %}
@@ -42,7 +68,5 @@
       {% endfor %}
     </tbody>
   </table>
-  
-  <p><a href="{% url 'users:home' %}">Home</a></p>
 </body>
 </html>

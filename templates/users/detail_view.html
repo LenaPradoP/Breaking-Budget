@@ -8,7 +8,7 @@
     <p><strong>Last Name:</strong> {{ user.last_name }}</p>
     <p><strong>Username:</strong> {{ user.username }}</p>
     <p><strong>Email:</strong> {{ user.email }}</p>
-    <a href="{% url 'users:home' %}">Return Home</a>
+    <a href="{% url 'expenses:list_expenses' %}">Home</a>
     <form method=“post” action="{% url 'users:delete_user' user.pk %}">
         {% csrf_token %}
         {{ form.as_p }}
