@@ -1,4 +1,5 @@
 from django import forms
+from .models import Expense
 
 class ExpensesFilterForm(forms.Form):
     CATEGORY_CHOICES = [
@@ -51,3 +52,10 @@ class ExpensesFilterForm(forms.Form):
             'id': 'order-filter',
         })
     )
+
+class ExpenseWebCreateForm(forms.ModelForm):
+    class Meta:  
+        model = Expense  
+        fields = ['amount', 'category', 'date', 'description'] 
+
+

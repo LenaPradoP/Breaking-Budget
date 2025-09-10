@@ -84,7 +84,7 @@
             <form method="post" action="{% url 'expenses:delete_expense' expense.pk %}">
               {% csrf_token %}
               <button type="submit">Delete</button>
-            </form>
+              </form>
           </td>
         </tr>
       {% empty %}
@@ -92,7 +92,11 @@
           <td colspan="6">No expenses yet.</td>
         </tr>
       {% endfor %}
+  
     </tbody>
   </table>
+  <a href="{% url 'expenses:new_expense' %}">Add Expense</a>
+    </a>
 </body>
 </html>
+ 
