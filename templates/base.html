@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Breaking Budget{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+    <header>
+      <form method="post" action="{% url 'users:logout' %}">
+        {% csrf_token %}
+        <button type="submit">Log out</button>
+      </form>
+
+      <form method="post" action="{% url 'users:user_detail' user.id %}">
+        {% csrf_token %}
+        <button type="submit">View Profile</button>
+      </form>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    {% if user.is_authenticated %}
+                        {% if user.role == 'admin' %}
+                            <!-- Enlaces para administradores -->
+                            <li><a href="{% url 'expenses:list_expenses' %}" class="{% if request.resolver_match.url_name == 'list_expenses' %}active{% endif %}">Expenses</a></li>
+                            <li><a href="{% url 'users:view_users' %}" class="{% if request.resolver_match.url_name == 'view_users' %}active{% endif %}">Travelers</a></li>
+                        {% elif user.role == 'user' %}
+                            <!-- Enlaces para usuarios regulares -->
+                            <li><a href="{% url 'expenses:list_expenses' %}" class="{% if request.resolver_match.url_name == 'list_expenses' %}active{% endif %}">My Expenses</a></li>
+                            <!-- <li><a href="{% url 'expenses:add_expense' %}" class="{% if request.resolver_match.url_name == 'add_expense' %}active{% endif %}">Add Expense</a></li> -->
+                        {% else %}
+                            <!-- Fallback para roles no definidos -->
+                            <li><a href="{% url 'users:user_detail' user.id %}">My Profile</a></li>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+            </nav>
+        </aside>
+
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+
+</body>
+</html>
