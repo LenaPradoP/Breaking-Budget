@@ -1,12 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>All Users</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
-<body>
-  <h1>All Users</h1>
+{% extends 'base.html' %}
+
+{% block title %}Travelers{% endblock %}
+
+{% block content %}
+
   <table>
     <thead>
       <tr>
@@ -42,5 +39,5 @@
     </tbody>
   </table>
   <p><a href="{% url 'expenses:list_expenses' %}">Home</a></p>
-</body>
-</html>
+
+    {% endblock %}
