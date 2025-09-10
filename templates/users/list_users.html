@@ -25,11 +25,11 @@
       </tr>
     </thead>
     <tbody>
-      {% for u in users %}
+      {% for user in users %}
         <tr>
-          <td>{{ u.username }}</td>
-          <td>{{ u.email }}</td>
-          <td>{{ u.role }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
           <td>
             <form method="get" action="{% url 'users:user_detail' user.pk %}">
               <button type="submit">View Details</button>
