@@ -8,6 +8,17 @@
 <body>
   <h1>All Users</h1>
 
+    <!-- Flash messages if errors -->
+  {% if messages %}
+  <ul class="messages" style="color: red;">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        {{ message }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
   <!-- Filters (GET) — shown once, above the table -->
   <form method="get">
     {{ form.role }}
