@@ -7,20 +7,23 @@
 </head>
 <body>
   <h1>All Users</h1>
+
+  <!-- Filters (GET) — shown once, above the table -->
+  <form method="get">
+    {{ form.role }}
+    {{ form.order_by }}
+    <button type="submit">Apply Filters</button>
+  </form>
+
   <table>
     <thead>
       <tr>
         <th>Username</th>
         <th>Email</th>
         <th>Role</th>
+        <th>Actions</th>
       </tr>
     </thead>
-<form method="get">
-    {{ form.role }}
-    {{ form.order_by }} 
-    <button type="submit">Apply Filters</button>
-</form>
-
     <tbody>
       {% for user in users %}
         <tr>
@@ -28,19 +31,21 @@
           <td>{{ user.email }}</td>
           <td>{{ user.role }}</td>
           <td>
-          <form method="post" action="{% url 'users:user_detail' user.pk %}">
-            {% csrf_token %}
-            <button type="submit">View Details</button>
-        </form>
-        </td>
+            <form method="get" action="{% url 'users:user_detail' user.pk %}">
+              <button type="submit">View Details</button>
+            </form>
+          </td>
         </tr>
       {% empty %}
         <tr>
-          <td colspan="3">No users yet.</td>
+          <td colspan="4">No users yet.</td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
-  <p><a href="{% url 'expenses:list_expenses' %}">Home</a></p>
+
+  <form method="get" action="{% url 'users:home' %}">
+    <button type="submit">Home</button>
+  </form>
 </body>
 </html>
