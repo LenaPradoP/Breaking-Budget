@@ -10,19 +10,21 @@ def new_expense(request):
     context = {
     'new_expense_form': form
 }
-    return render(request, 'expenses/new.html', context)
+    return render(request, 'expenses/new.html', {"form": form})
 
-
+@login_required
 def create_expense(request):
- new_expense = None
+ form = None
  if request.method == "POST":
-    new_expense = ExpenseWebCreateForm(request.POST)
-    if new_expense.is_valid():
-        new_expense.status = 'pending'
-        new_expense.save()
+    form = ExpenseWebCreateForm(request.POST)
+    if form.is_valid():
+        expense = form.save(commit=False)
+        expense.user = request.user     
+        expense.status = 'pending'
+        form.save()
     return redirect('expenses:list_expenses')
  else: 
-        new_expense = ExpenseWebCreateForm()
- return render(request, 'expenses/new.html', {'expense': new_expense})
+        form = ExpenseWebCreateForm()
+ return render(request, 'expenses/new.html', {'form': form})
  
 
