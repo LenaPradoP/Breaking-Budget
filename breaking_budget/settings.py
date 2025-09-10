@@ -129,7 +129,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'users.CustomUser' # tells django to use CustomUser and not the default User, must be done before first migration
-LOGIN_URL = "login"
+LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"  
 SHORT_DATE_FORMAT = "M j, Y" 
