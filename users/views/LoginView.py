@@ -22,7 +22,7 @@ def login_user(request):
 def logout_user(request):
     if request.method == "POST":
         logout(request)
-        return redirect("users:login")
+        return redirect("login")
     return redirect("expenses:list_expenses")
 
 def home(request):

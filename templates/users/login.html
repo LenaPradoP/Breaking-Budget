@@ -7,7 +7,7 @@
 <body>
   <h1>Login</h1>
 
-  <form method="post" action="{% url 'users:login' %}">
+  <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
 
     <!-- Non-field errors (e.g., invalid credentials) -->
