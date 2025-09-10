@@ -7,23 +7,18 @@ from ..forms import UserFilterForm
 
 @login_required
 def view_users(request):
-    if not request.user.is_authenticated:
-        raise PermissionDenied
     role = getattr(request.user, "role", None)
-    is_admin = (
-        (hasattr(CustomUser, "Role") and role == CustomUser.Role.ADMIN) or (role == "admin")
-    )
+    is_admin = request.user.is_superuser or request.user.role == "admin"
     if not is_admin:
-        raise PermissionDenied
+        raise PermissionDenied("You don't have permission to see this page")
+    
     users = CustomUser.objects.all().order_by("username")
-
     form, users = apply_user_filters_and_ordering(request, users)
 
     context = {
         "users": users,
         "form": form,
-    }
-    
+    }    
     return render(request, 'users/list_users.html', context)
 
 def apply_user_filters_and_ordering(request, initial_queryset):
@@ -38,14 +33,11 @@ def apply_user_filters_and_ordering(request, initial_queryset):
         tuple: (form, filtered_queryset)
     """
     form = UserFilterForm(request.GET)
-    
     users = initial_queryset
-    
     if form.is_valid():
-        if form.cleaned_data['role']:
-            users = users.filter(role=form.cleaned_data['role'])
-        
-        if form.cleaned_data['order_by']:
-            users = users.order_by(form.cleaned_data['order_by'])
-    
+        role = form.cleaned_data.get('role') #using GET avoids KeyError if the field is missing
+        order_by = form.cleaned_data.get('order_by')
+        if role: #filter only when the value is provided
+            users = users.filter(role=role)
+        users = users.order_by(order_by or 'username') #fallback to username ordering if no value is given for order_by in our forms.py
     return form, users

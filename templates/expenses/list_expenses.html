@@ -104,8 +104,10 @@
   
     </tbody>
   </table>
-  <a href="{% url 'expenses:new_expense' %}">Add Expense</a>
-    </a>
+  <form action="{% url 'expenses:new_expense' %}" method="GET">
+    {% csrf_token %}
+    <button type="submit">Add Expense</button>
+    </form>
 </body>
 </html>
  
