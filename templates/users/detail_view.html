@@ -8,10 +8,11 @@
     <p><strong>Username:</strong> {{ user.username }}</p>
     <p><strong>Email:</strong> {{ user.email }}</p>
     <a href="{% url 'expenses:list_expenses' %}">Home</a>
-    <form method=“post” action="{% url 'users:delete_user' user.pk %}">
+    {% if user.is_superuser or user.role == 'admin' %}
+      <form method="post" action="{% url 'users:delete_user' user.pk %}" style="display:inline">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type=“submit”>Delete User</button>
-    </form>
+        <button type="submit">Delete</button>
+      </form>
+    {% endif %}
     <a href="{% url 'users:edit_user' user.pk %}">Edit User</a>
  {% endblock %}
