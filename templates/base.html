@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Breaking Budget{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+<header>
+    <div class="header-left">
+        <a href="{% url 'expenses:list_expenses' %}" class="logo">Breaking Budget</a>
+    </div>
+    
+    <div class="header-right">
+        <form method="post" action="{% url 'users:logout' %}">
+            {% csrf_token %}
+            <button type="submit">Log Out</button>
+        </form>
+
+        <form method="post" action="{% url 'users:user_detail' user.id %}">
+            {% csrf_token %}
+            <button type="submit" class="profile-btn">
+                <i class="fas fa-user"></i>
+            </button>
+</form>
+    </div>
+</header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    {% if user.is_authenticated %}
+                        {% if request.user.role == 'admin' %}
+                            <li><a href="{% url 'expenses:list_expenses' %}" class="{% if request.resolver_match.url_name == 'list_expenses' %}active{% endif %}">Expenses</a></li>
+                            <li><a href="{% url 'expenses:new_expense' %}" class="{% if request.resolver_match.url_name == 'new_expense' %}active{% endif %}">Add Expense</a></li>
+                            <li><a href="{% url 'users:view_users' %}" class="{% if request.resolver_match.url_name == 'view_users' %}active{% endif %}">Travelers</a></li>
+                            <li><a href="{% url 'users:new_user' %}" class="{% if request.resolver_match.url_name == 'new_user' %}active{% endif %}">Add Traveler</a></li>
+                        {% elif request.user.role == 'traveler' %}
+                            <li><a href="{% url 'expenses:list_expenses' %}" class="{% if request.resolver_match.url_name == 'list_expenses' %}active{% endif %}">My Expenses</a></li>
+                            <li><a href="{% url 'expenses:new_expense' %}" class="{% if request.resolver_match.url_name == 'new_expense' %}active{% endif %}">Add Expense</a></li>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+            </nav>
+        </aside>
+
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+
+</body>
+</html>

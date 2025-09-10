@@ -1,12 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>All Users</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
-<body>
-  <h1>All Users</h1>
+{% extends 'base.html' %}
+
+{% block title %}Travelers{% endblock %}
+
+{% block content %}
 
     <!-- Flash messages if errors -->
   {% if messages %}
@@ -54,9 +50,6 @@
       {% endfor %}
     </tbody>
   </table>
+  <p><a href="{% url 'expenses:list_expenses' %}">Home</a></p>
 
-  <form method="get" action="{% url 'users:home' %}">
-    <button type="submit">Home</button>
-  </form>
-</body>
-</html>
+    {% endblock %}

@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<head><title>Your account information {{user.first.name }}</title></head>
-  <body>
+{% extends 'base.html' %}
+
+{% block title %}Traveler Detail{% endblock %}
+
+{% block content %}
     <p><strong>First Name:</strong> {{ user.first_name }}</p>
     <p><strong>Last Name:</strong> {{ user.last_name }}</p>
     <p><strong>Username:</strong> {{ user.username }}</p>
@@ -16,5 +15,4 @@
       </form>
     {% endif %}
     <a href="{% url 'users:edit_user' user.pk %}">Edit User</a>
-  </body>
-</html>
+ {% endblock %}

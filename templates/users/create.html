@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Traveler Created</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Update User{% endblock %}
+
+{% block content %}
   <h1>Traveler Created</h1>
   <p>Username: {{ user.username }}</p>
   <p>Email: {{ user.email }}</p>
   <p><a href="{% url 'users:new_user' %}">Create another</a></p>
-</body>
-</html>
+{% endblock %}
