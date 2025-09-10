@@ -17,12 +17,18 @@
     {{ form.category }}
     {{ form.status }}
     {{ form.order_by }}
+    {% if user.role == 'admin' %}
+      <label style="margin-left:8px;">
+        {{ form.mine }} {{ form.mine.label }}
+      </label>
+    {% endif %}
     <button type="submit">Apply Filters</button>
   </form>
 
   <table>
     <thead>
       <tr>
+        <th>Username</th>
         <th>Description</th>
         <th>Date</th>
         <th>Category</th>
@@ -34,16 +40,45 @@
     <tbody>
       {% for expense in expenses %}
         <tr>
+          {% if user.is_superuser or user.role == 'admin' %}
+            <td>{{ expense.user.username }}</td>
+          {% endif %}
           <td>{{ expense.description }}</td>
           <td>{{ expense.date|date:"SHORT_DATE_FORMAT" }}</td>
           <td>{{ expense.category }}</td>
           <td>{{ expense.amount }}</td>
-          <td>{{ expense.status }}</td>
+          <td>
+            {% if user.is_superuser %}
+              <form method="post" action="{% url 'expenses:update_expense_status' expense.pk %}">
+                {% csrf_token %}
+                <select name="status">
+                  <option value="pending"{% if expense.status == 'pending' %} selected{% endif %}>Pending</option>
+                  <option value="approved"{% if expense.status == 'approved' %} selected{% endif %}>Approved</option>
+                  <option value="rejected"{% if expense.status == 'rejected' %} selected{% endif %}>Rejected</option>
+                </select>
+                <button type="submit">Update</button>
+              </form>
+
+            {% elif user.role == 'admin' and expense.status == 'pending' %}
+              <form method="post" action="{% url 'expenses:update_expense_status' expense.pk %}">
+                {% csrf_token %}
+                <select name="status">
+                  <option value="pending" selected>Pending</option>
+                  <option value="approved">Approved</option>
+                  <option value="rejected">Rejected</option>
+                </select>
+                <button type="submit">Update</button>
+              </form>
+
+            {% else %}
+              {{ expense.get_status_display }}
+            {% endif %}
+          </td>
           <td>
             <form method="post" action="{% url 'expenses:delete_expense' expense.pk %}">
               {% csrf_token %}
               <button type="submit">Delete</button>
-            </form>
+              </form>
           </td>
         </tr>
       {% empty %}
@@ -55,4 +90,3 @@
       {% endblock %}
     </tbody>
   </table>
-
