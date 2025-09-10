@@ -13,7 +13,7 @@
     <!-- Non-field errors (e.g., invalid credentials) -->
     {% if form.non_field_errors %}
       <ul style="color: red;">
-        {% for e in form.non_field_errors %}<li>{{ e }}</li>{% endfor %}
+        {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
       </ul>
     {% endif %}
 
@@ -22,7 +22,7 @@
       {{ form.username }}
       {% if form.username.errors %}
         <br><small style="color:red;">
-          {% for e in form.username.errors %}{{ e }}{% endfor %}
+          {% for error in form.username.errors %}{{ error }}{% endfor %}
         </small>
       {% endif %}
     </p>
@@ -32,7 +32,7 @@
       {{ form.password }}
       {% if form.password.errors %}
         <br><small style="color:red;">
-          {% for e in form.password.errors %}{{ e }}{% endfor %}
+          {% for error in form.password.errors %}{{ error }}{% endfor %}
         </small>
       {% endif %}
     </p>
