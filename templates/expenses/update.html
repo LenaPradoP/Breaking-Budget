@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Expense</title>
+    </head>
+    <body>
+ <h1> Update your Expense</h1>
+        <form method="post" action="{% url 'expenses:update_expense' expense.pk%}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit"> Update Expense</button>
+        <a href="{% url 'expenses:list_expenses' %}">Cancel</a>
+    </form>
+</body>
+</html>

@@ -63,3 +63,9 @@ class ExpenseWebCreateForm(forms.ModelForm):
     class Meta:  
         model = Expense  
         fields = ['amount', 'category', 'date', 'description'] 
+
+
+class ExpenseForm(forms.ModelForm):
+    class Meta:
+        model = Expense
+        fields = ['amount', 'category', 'date', 'description']
