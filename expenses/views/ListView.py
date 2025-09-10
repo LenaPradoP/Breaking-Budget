@@ -44,6 +44,10 @@ def apply_expenses_filters_and_ordering(request, initial_queryset):
 
         if form.cleaned_data['status']:
             expenses = expenses.filter(status=form.cleaned_data['status'])
+
+        # Admin-only: "Only my expenses"
+        if form.cleaned_data.get('mine') and request.user.role == 'admin':
+            expenses = expenses.filter(user=request.user)
         
         if form.cleaned_data['order_by']:
             expenses = expenses.order_by(form.cleaned_data['order_by'])
