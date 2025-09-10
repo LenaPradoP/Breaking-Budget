@@ -7,7 +7,7 @@ from ..forms import ExpensesFilterForm
 @login_required
 def list_expenses(request):
 
-    if request.user.role == 'admin':
+    if request.user.role == 'admin' or request.user.is_superuser:
         expenses = Expense.objects.all().order_by("status")
     elif request.user.role == 'traveler':
         expenses = Expense.objects.filter(user_id=request.user.pk).order_by("status")
