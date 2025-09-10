@@ -4,7 +4,6 @@ from .views import LoginView, DetailView, CreateView, ListUsers, UpdateView, Del
 app_name = "users"
 
 urlpatterns = [
-    path("login/", LoginView.login_user, name="login"),
     path("home/", LoginView.home, name="home"),
     path("logout/", LoginView.logout_user, name="logout"),
     path("<int:pk>/", DetailView.user_detail, name="user_detail"),
