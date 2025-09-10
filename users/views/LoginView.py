@@ -9,17 +9,17 @@ def login_user(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect("users:home")
+            return redirect("expenses:list_expenses")
     else:
         form = AuthenticationForm(request)
     return render(request, "users/login.html", {"form": form})
 
 
 def home(request):
-    return render(request, "users/home.html")
+    return render(request, "expenses/list_expenses.html")
 
 def logout_user(request):
     if request.method == "POST":
         logout(request)
         return redirect("users:login")
-    return redirect("users:home")
+    return redirect("expenses:list_expenses")
