@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Expense</title>
-    </head>
-    <body>
+{% extends 'base.html' %}
+
+{% block title %}New Expense{% endblock %}
+
+{% block content %}
  <h1> Update your Expense</h1>
         <form method="post" action="{% url 'expenses:update_expense' expense.pk%}">
         {% csrf_token %}
@@ -13,5 +10,4 @@
         <button type="submit"> Update Expense</button>
         <a href="{% url 'expenses:list_expenses' %}">Cancel</a>
     </form>
-</body>
-</html>
+  {% endblock %}
