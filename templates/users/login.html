@@ -1,22 +1,43 @@
-<!doctype html>
-<html>
-  <head><title>Login</title></head>
-  <body>
-    <h1>Login</h1>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Log in</button>
-    </form>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <h1>Login</h1>
 
-    {% if form.errors %}
+  <form method="post" action="{% url 'users:login' %}">
+    {% csrf_token %}
+
+    <!-- Non-field errors (e.g., invalid credentials) -->
+    {% if form.non_field_errors %}
       <ul style="color: red;">
-        {% for field, errors in form.errors.items %}
-          {% for error in errors %}
-            <li>{{ error }}</li>
-          {% endfor %}
-        {% endfor %}
+        {% for e in form.non_field_errors %}<li>{{ e }}</li>{% endfor %}
       </ul>
     {% endif %}
-  </body>
+
+    <p>
+      {{ form.username.label_tag }}
+      {{ form.username }}
+      {% if form.username.errors %}
+        <br><small style="color:red;">
+          {% for e in form.username.errors %}{{ e }}{% endfor %}
+        </small>
+      {% endif %}
+    </p>
+
+    <p>
+      {{ form.password.label_tag }}
+      {{ form.password }}
+      {% if form.password.errors %}
+        <br><small style="color:red;">
+          {% for e in form.password.errors %}{{ e }}{% endfor %}
+        </small>
+      {% endif %}
+    </p>
+
+    <button type="submit">Log in</button>
+  </form>
+</body>
 </html>
