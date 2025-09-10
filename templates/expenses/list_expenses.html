@@ -84,10 +84,14 @@
             <form method="post" action="{% url 'expenses:delete_expense' expense.pk %}">
               {% csrf_token %}
               <button type="submit">Delete</button>
+               </p>
               </form>
-          </td>
+              <a href="{% url 'expenses:edit_expense' expense.pk %}">
+              <button type="button" >Update my Expense</button>
+              </a>
+              </td>
         </tr>
-      {% empty %}
+         {% empty %}
         <tr>
           <td colspan="6">No expenses yet.</td>
         </tr>
