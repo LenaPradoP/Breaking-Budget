@@ -53,9 +53,13 @@ class ExpensesFilterForm(forms.Form):
         })
     )
 
+    mine = forms.BooleanField(
+            required=False,
+            label="Only my expenses",
+            widget=forms.CheckboxInput(attrs={'id': 'mine-filter'})
+    )
+
 class ExpenseWebCreateForm(forms.ModelForm):
     class Meta:  
         model = Expense  
         fields = ['amount', 'category', 'date', 'description'] 
-
-
