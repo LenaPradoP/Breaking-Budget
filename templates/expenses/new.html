@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Add Expense</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}New Expense{% endblock %}
+
+{% block content %}
+
   <form action="{% url 'expenses:create_expense' %}" method="POST">
     {% csrf_token %}
     <p>
@@ -26,5 +25,5 @@
     <button type="submit">Create new Expense </button>
 
   </form>
-</body>
-</html>
+  
+  {% endblock %}

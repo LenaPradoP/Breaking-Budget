@@ -1,19 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>All Users</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
-<body>
-  <h1>All Users</h1>
+{% extends 'base.html' %}
 
-  <!-- Filters (GET) — shown once, above the table -->
-  <form method="get">
-    {{ form.role }}
-    {{ form.order_by }}
-    <button type="submit">Apply Filters</button>
-  </form>
+{% block title %}Travelers{% endblock %}
+
+{% block content %}
 
   <table>
     <thead>
@@ -43,9 +32,6 @@
       {% endfor %}
     </tbody>
   </table>
+  <p><a href="{% url 'expenses:list_expenses' %}">Home</a></p>
 
-  <form method="get" action="{% url 'users:home' %}">
-    <button type="submit">Home</button>
-  </form>
-</body>
-</html>
+    {% endblock %}

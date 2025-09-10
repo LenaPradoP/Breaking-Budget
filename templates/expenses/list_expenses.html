@@ -1,23 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>Expenses</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
-<body>
-      <form method="post" action="{% url 'users:logout' %}">
-        {% csrf_token %}
-        <button type="submit">Log out</button>
-      </form>
+{% extends 'base.html' %}
 
-      <form method="post" action="{% url 'users:user_detail' user.id %}">
-        {% csrf_token %}
-        <button type="submit">View Profile</button>
-      </form>
+{% block title %}Expenses{% endblock %}
 
-  <h1>Expenses</h1>
-
+{% block content %}
   <!-- Flash messages -->
   {% if messages %}
     <ul>
@@ -101,13 +86,7 @@
           <td colspan="6">No expenses yet.</td>
         </tr>
       {% endfor %}
-  
     </tbody>
   </table>
-  <form action="{% url 'expenses:new_expense' %}" method="GET">
-    {% csrf_token %}
-    <button type="submit">Add Expense</button>
-    </form>
-</body>
-</html>
- 
+    
+  {% endblock %}

@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Add Traveler</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Create Traveler{% endblock %}
+
+{% block content %}
   <form action="{% url 'users:create_user' %}" method="POST">
     {% csrf_token %}
     <p>
@@ -26,5 +24,4 @@
     <button type="submit">Create new Traveler</button>
     <a href="{% url 'expenses:list_expenses' %}">Cancel</a>
   </form>
-</body>
-</html>
+  {% endblock %}

@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update User</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Update User{% endblock %}
+
+{% block content %}
     <h1>Update User for {{ user.username }}</h1>
     
     <form method="post" action="{% url 'users:update_user' user.pk %}">
@@ -15,5 +12,4 @@
     </form>
     
     <a href="{% url 'users:user_detail' user.pk %}">Cancel</a>
-</body>
-</html>
+  {% endblock %}
