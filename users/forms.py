@@ -16,17 +16,12 @@ class CustomUserChangeForm(UserChangeForm):
         model = CustomUser
         fields = ("username", "email", "role")  
 
+# Admin web form to create a new Traveler
 class CustomUserWebCreateForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = CustomUser
-        fields = ("username", "email", "first_name", "last_name")  
+        fields = ("username", "email", "first_name", "last_name")
 
-    def save(self, commit=True):
-        user = super().save(commit=False)  
-        user.role = getattr(CustomUser.Role, "TRAVELER", "traveler")
-        if commit:
-            user.save()
-        return user
 
 # For admins to edit travelers' account details, excluding password and role
 class AdminUserEditForm(UserChangeForm):
