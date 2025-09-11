@@ -10,14 +10,16 @@ def view_users(request):
     is_admin = request.user.is_superuser or request.user.role == "admin"
     if not is_admin:
         raise PermissionDenied("You don't have permission to see this page")
-    
-    users = CustomUser.objects.all().order_by("username")
+
+    # Hide superusers from the web list
+    users = CustomUser.objects.filter(is_superuser=False).order_by("username")
+
     form, users = apply_user_filters_and_ordering(request, users)
 
     context = {
         "users": users,
         "form": form,
-    }    
+    }
     return render(request, 'users/list_users.html', context)
 
 def apply_user_filters_and_ordering(request, initial_queryset):
@@ -33,10 +35,14 @@ def apply_user_filters_and_ordering(request, initial_queryset):
     """
     form = UserFilterForm(request.GET)
     users = initial_queryset
+
     if form.is_valid():
-        role = form.cleaned_data.get('role') #using GET avoids KeyError if the field is missing
+        role = form.cleaned_data.get('role')
         order_by = form.cleaned_data.get('order_by')
-        if role: #filter only when the value is provided
+
+        if role:
             users = users.filter(role=role)
-        users = users.order_by(order_by or 'username') #fallback to username ordering if no value is given for order_by in our forms.py
+
+        users = users.order_by(order_by or 'username')  # fallback to username
+
     return form, users
