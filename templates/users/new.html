@@ -3,6 +3,20 @@
 {% block title %}Create Traveler{% endblock %}
 
 {% block content %}
+
+<style>
+    .errorlist {
+      color: #d00000;      /* red */
+      margin: 0 0 1rem;
+      padding-left: 1.2rem;
+    }
+    .errorlist li { list-style: disc; }
+  </style>
+  
+<h1>Add Traveler</h1>
+
+  {{ form.non_field_errors }}
+
   <form action="{% url 'users:create_user' %}" method="POST">
     {% csrf_token %}
     <p>
@@ -22,6 +36,8 @@
         {{ form.password2 }} {{ form.password2.errors }}
     </p>
     <button type="submit">Create new Traveler</button>
-    <a href="{% url 'expenses:list_expenses' %}">Cancel</a>
+  </form>
+  <form method="get" action="{% url 'users:view_users' %}">
+        <button type="submit">Cancel</button>
   </form>
   {% endblock %}
