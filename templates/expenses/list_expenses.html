@@ -26,21 +26,10 @@
   </form>
 
   <table>
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>Description</th>
-        <th>Date</th>
-        <th>Category</th>
-        <th>Amount</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
     <tbody>
       {% for expense in expenses %}
         <tr>
-          {% if user.is_superuser or user.role == 'admin' %}
+          {% if user.role == 'admin' %}
             <td>{{ expense.user.username }}</td>
           {% endif %}
           <td>{{ expense.description }}</td>
@@ -48,18 +37,7 @@
           <td>{{ expense.category }}</td>
           <td>{{ expense.amount }}</td>
           <td>
-            {% if user.is_superuser %}
-              <form method="post" action="{% url 'expenses:update_expense_status' expense.pk %}">
-                {% csrf_token %}
-                <select name="status">
-                  <option value="pending"{% if expense.status == 'pending' %} selected{% endif %}>Pending</option>
-                  <option value="approved"{% if expense.status == 'approved' %} selected{% endif %}>Approved</option>
-                  <option value="rejected"{% if expense.status == 'rejected' %} selected{% endif %}>Rejected</option>
-                </select>
-                <button type="submit">Update</button>
-              </form>
-
-            {% elif user.role == 'admin' and expense.status == 'pending' %}
+            {% if user.role == 'admin' and expense.status == 'pending' %}
               <form method="post" action="{% url 'expenses:update_expense_status' expense.pk %}">
                 {% csrf_token %}
                 <select name="status">
@@ -69,11 +47,11 @@
                 </select>
                 <button type="submit">Update</button>
               </form>
-
             {% else %}
               {{ expense.get_status_display }}
             {% endif %}
           </td>
+          {% if user.role == 'traveler' or expense.user == user %}
           <td>
             <form method="post" action="{% url 'expenses:delete_expense' expense.pk %}">
               {% csrf_token %}
@@ -81,9 +59,10 @@
                </p>
               </form>
               <a href="{% url 'expenses:edit_expense' expense.pk %}">
-              <button type="button" >Update my Expense</button>
+              <button type="button" >Update</button>
               </a>
               </td>
+          {% endif %}
         </tr>
          {% empty %}
         <tr>
