@@ -4,6 +4,9 @@
 
 {% block content %}
 
+  {{ form.non_field_errors }}
+
+
   <form action="{% url 'expenses:create_expense' %}" method="POST" class="new-expense-form">
     {% csrf_token %}
     <p>
