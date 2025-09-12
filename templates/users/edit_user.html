@@ -3,13 +3,9 @@
 {% block title %}Update User{% endblock %}
 
 {% block content %}
-    <h1>Update User for {{ user.username }}</h1>
-    
-    <form method="post" action="{% url 'users:update_user' user.pk %}">
+    <form method="post" action="{% url 'users:update_user' user.pk %}" class="edit-user-form">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Update User</button>
     </form>
-    
-    <a href="{% url 'users:user_detail' user.pk %}">Cancel</a>
   {% endblock %}

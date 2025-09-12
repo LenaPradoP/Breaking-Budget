@@ -4,7 +4,7 @@
 
 {% block content %}
 
-  <form action="{% url 'expenses:create_expense' %}" method="POST">
+  <form action="{% url 'expenses:create_expense' %}" method="POST" class="new-expense-form">
     {% csrf_token %}
     <p>
         <label for="{{ form.date.id_for_label }}">Date</label>

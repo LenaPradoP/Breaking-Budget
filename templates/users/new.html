@@ -3,7 +3,7 @@
 {% block title %}Create Traveler{% endblock %}
 
 {% block content %}
-  <form action="{% url 'users:create_user' %}" method="POST">
+  <form action="{% url 'users:create_user' %}" method="POST" class="new-user-form">
     {% csrf_token %}
     <p>
         <label for="{{ form.username.id_for_label }}">Username</label>
@@ -22,6 +22,5 @@
         {{ form.password2 }} {{ form.password2.errors }}
     </p>
     <button type="submit">Create new Traveler</button>
-    <a href="{% url 'expenses:list_expenses' %}">Cancel</a>
   </form>
   {% endblock %}

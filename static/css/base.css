@@ -312,3 +312,43 @@ input[type="checkbox"] {
     font-size: 0.9rem;
     line-height: 1;
 }
+
+.new-user-form,
+.edit-user-form, 
+.update-expense-form,
+.new-expense-form {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border: 1px solid #3F6F51;
+    border-radius: 4px;
+}
+
+.new-user-form p,
+.edit-user-form p,
+.update-expense-form p,
+.new-expense-form p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.new-user-form label,
+.edit-user-form label,
+.update-expense-form label,
+.new-expense-form label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-size: 18px;
+}
+
+.new-user-form button[type="submit"],
+.edit-user-form button[type="submit"],
+.update-expense-form button[type="submit"],
+.new-expense-form button[type="submit"] {
+    padding: 12px 24px;
+    font-size: 18px;
+    margin: 1rem auto 0 auto;
+    display: block;
+}
