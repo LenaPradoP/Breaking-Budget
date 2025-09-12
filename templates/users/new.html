@@ -3,7 +3,8 @@
 {% block title %}Create Traveler{% endblock %}
 
 {% block content %}
-  <form action="{% url 'users:create_user' %}" method="POST" class="new-user-form">
+    {{ form.non_field_errors }}
+  <form action="{% url 'users:create_user' %}" method="POST">
     {% csrf_token %}
     <p>
         <label for="{{ form.username.id_for_label }}">Username</label>
