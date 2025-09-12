@@ -5,61 +5,39 @@
 {% block content %}
   <!-- Flash messages -->
   {% if messages %}
-    <ul>
+    <ul class="errorlist">
       {% for message in messages %}
-        <li style="color: red;">{{ message }}</li>
+        <li>{{ message }}</li>
       {% endfor %}
     </ul>
   {% endif %}
 
   <!-- Filters (GET) -->
-  <form method="get">
+  <form method="get" class="filter-bar">
     {{ form.category }}
     {{ form.status }}
     {{ form.order_by }}
     {% if user.role == 'admin' %}
-      <label style="margin-left:8px;">
+      <label class="checkbox" style="margin-left:8px;">
         {{ form.mine }} {{ form.mine.label }}
       </label>
     {% endif %}
     <button type="submit">Apply Filters</button>
   </form>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>Description</th>
-        <th>Date</th>
-        <th>Category</th>
-        <th>Amount</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
+  <table class="expenses-table">
     <tbody>
       {% for expense in expenses %}
         <tr>
-          {% if user.is_superuser or user.role == 'admin' %}
-            <td>{{ expense.user.username }}</td>
+          {% if user.role == 'admin' %}
+            <td class="username">{{ expense.user.first_name }} {{ expense.user.last_name }}</td>
           {% endif %}
-          <td>{{ expense.description }}</td>
-          <td>{{ expense.date|date:"SHORT_DATE_FORMAT" }}</td>
-          <td>{{ expense.category }}</td>
-          <td>{{ expense.amount }}</td>
-          <td>
-            {% if user.is_superuser %}
-              <form method="post" action="{% url 'expenses:update_expense_status' expense.pk %}">
-                {% csrf_token %}
-                <select name="status">
-                  <option value="pending"{% if expense.status == 'pending' %} selected{% endif %}>Pending</option>
-                  <option value="approved"{% if expense.status == 'approved' %} selected{% endif %}>Approved</option>
-                  <option value="rejected"{% if expense.status == 'rejected' %} selected{% endif %}>Rejected</option>
-                </select>
-                <button type="submit">Update</button>
-              </form>
-
-            {% elif user.role == 'admin' and expense.status == 'pending' %}
+          <td class="description">{{ expense.description }}</td>
+          <td class="date">{{ expense.date|date:"SHORT_DATE_FORMAT" }}</td>
+          <td class="category">{{ expense.category }}</td>
+          <td class="amount">{{ expense.amount }}</td>
+          <td class="status">
+            {% if user.role == 'admin' and expense.status == 'pending' %}
               <form method="post" action="{% url 'expenses:update_expense_status' expense.pk %}">
                 {% csrf_token %}
                 <select name="status">
@@ -67,25 +45,25 @@
                   <option value="approved">Approved</option>
                   <option value="rejected">Rejected</option>
                 </select>
-                <button type="submit">Update</button>
+                <button onclick="return confirm('Are you sure you want to update this expense?')" type="submit">Update</button>
               </form>
-
             {% else %}
               {{ expense.get_status_display }}
             {% endif %}
           </td>
-          <td>
-            <form method="post" action="{% url 'expenses:delete_expense' expense.pk %}">
-              {% csrf_token %}
-              <button type="submit">Delete</button>
-               </p>
+          <td class="actions">
+            {% if user.role == 'traveler' or expense.user == user %}
+              <form method="post" action="{% url 'expenses:delete_expense' expense.pk %}">
+                {% csrf_token %}
+                <button onclick="return confirm('Are you sure you want to delete this expense?')" type="submit">Delete</button>
               </form>
               <a href="{% url 'expenses:edit_expense' expense.pk %}">
-              <button type="button" >Update my Expense</button>
+                <button type="button">Edit</button>
               </a>
-              </td>
+            {% endif %}
+          </td>
         </tr>
-         {% empty %}
+      {% empty %}
         <tr>
           <td colspan="6">No expenses yet.</td>
         </tr>
@@ -93,4 +71,4 @@
     </tbody>
   </table>
     
-  {% endblock %}
+{% endblock %}

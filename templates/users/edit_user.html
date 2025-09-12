@@ -2,18 +2,9 @@
 
 {% block title %}Update User{% endblock %}
 
-{% block content %}
-
-    <style>
-        .errorlist { color: #d00000; margin: 0 0 1rem; padding-left: 1.2rem; }
-        .errorlist li { list-style: disc; }
-    </style>
-
-    <h1>Update User for {{ user.username }}</h1>
-    
+{% block content %}    
     {{ form.non_field_errors }}
-
-    <form method="post" action="{% url 'users:update_user' user.pk %}">
+    <form method="post" action="{% url 'users:update_user' user.pk %}" class="edit-user-form">        
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Save</button>

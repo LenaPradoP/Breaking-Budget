@@ -3,11 +3,9 @@
 {% block title %}New Expense{% endblock %}
 
 {% block content %}
- <h1> Update your Expense</h1>
-        <form method="post" action="{% url 'expenses:update_expense' expense.pk%}">
+        <form method="post" action="{% url 'expenses:update_expense' expense.pk%}" class="update-expense-form">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit"> Update Expense</button>
-        <a href="{% url 'expenses:list_expenses' %}">Cancel</a>
     </form>
   {% endblock %}

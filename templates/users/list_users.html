@@ -6,38 +6,28 @@
 
     <!-- Flash messages if errors -->
   {% if messages %}
-  <ul class="messages" style="color: red;">
-    {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-        {{ message }}
-      </li>
-    {% endfor %}
-  </ul>
-{% endif %}
+    <ul class="errorlist">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 
   <!-- Filters (GET) — shown once, above the table -->
-  <form method="get">
+  <form method="get" class="filter-bar">
     {{ form.role }}
     {{ form.order_by }}
     <button type="submit">Apply Filters</button>
   </form>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
+  <table class="users-table">
     <tbody>
       {% for user in users %}
         <tr>
-          <td>{{ user.username }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.role }}</td>
-          <td>
+          <td class="fullname">{{ user.first_name }} {{ user.last_name }}</td>
+          <td class="email">{{ user.email }}</td>
+          <td class="role">{{ user.role }}</td>
+          <td class="actions">
             <form method="get" action="{% url 'users:user_detail' user.pk %}">
               <button type="submit">View Details</button>
             </form>
@@ -50,6 +40,5 @@
       {% endfor %}
     </tbody>
   </table>
-  <p><a href="{% url 'expenses:list_expenses' %}">Home</a></p>
 
     {% endblock %}

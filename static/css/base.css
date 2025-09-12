@@ -41,7 +41,7 @@ header {
     margin: 0;
 }
 
-.header-right button {
+button {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 4px;
@@ -49,10 +49,6 @@ header {
     color: #DCCC5B;
     cursor: pointer;
     font-size: 1rem;
-}
-
-.header-right button:hover {
-    background: #1d4028;
 }
 
 .header-right button.profile-btn {
@@ -70,7 +66,7 @@ header {
     justify-content: center;
 }
 
-.header-right button.profile-btn:hover {
+button:hover, .header-right button.profile-btn:hover {
     background: #1d4028;
 }
 
@@ -105,11 +101,7 @@ header {
     border-radius: 4px;
 }
 
-.sidebar nav ul li a:hover {
-    background: #245838;
-}
-
-.sidebar nav ul li a.active {
+.sidebar nav ul li a:hover, .sidebar nav ul li a.active {
     background: #245838;
 }
 
@@ -117,4 +109,300 @@ main {
     flex: 1;
     padding: 1rem;
     overflow-y: auto;
+}
+
+.errorlist {
+    color: #d00000;
+    margin: 0 0 1rem;
+    padding-left: 1.2rem;
+}
+
+.errorlist li { 
+    list-style: disc; 
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+select {
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background: white;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+select:focus {
+    outline: none;
+    border-color: #0F3828;
+}
+
+input[type="checkbox"] {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    font-size: inherit;
+    accent-color: #DCCC5B;
+}
+
+.checkbox{
+    color: #ddd
+}
+
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem; 
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #3F6F51; 
+    border-radius: 8px;
+}
+
+.filter-bar select {
+    height: 40px; 
+    padding: 0 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    background: white;
+    min-width: 150px;
+    box-sizing: border-box;
+}
+
+.expenses-table, .users-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.5rem;
+}
+
+.expenses-table tbody tr, .users-table tbody tr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    font-size: 20px;
+    background: white;
+    border: 1px solid #3F6F51;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    min-height: 60px;
+}
+
+.expenses-table tbody tr:hover, .users-table tbody tr:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.expenses-table tbody td.username {
+    flex: 0 0 150px;
+    font-weight: bold;
+    border: none;
+    padding: 0;
+}
+
+.expenses-table tbody td.description {
+    flex: 0 0 250px;
+    min-width: 0;
+    border: none;
+    padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.expenses-table tbody td.date {
+    flex: 0 0 100px;
+    border: none;
+    padding: 0;
+}
+
+.expenses-table tbody td.category {
+    flex: 0 0 120px;
+    border: none;
+    padding: 0;
+}
+
+.expenses-table tbody td.amount {
+    flex: 0 0 100px;
+    text-align: right;
+    border: none;
+    padding: 0;
+}
+
+.expenses-table tbody td.status {
+    flex: 0 0 180px;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.expenses-table tbody td.actions {
+    flex: 0 0 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    border: none;
+    padding: 0;
+}
+
+.users-table tbody td.fullname {
+    flex: 0 0 200px;
+    font-weight: bold;
+    border: none;
+    padding: 0;
+}
+
+.users-table tbody td.email {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    padding: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.users-table tbody td.role {
+    flex: 0 0 100px;
+    border: none;
+    padding: 0;
+}
+
+.users-table tbody td.actions {
+    flex: 0 0 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    padding: 0;
+}
+
+.expenses-table tbody td.actions button,
+.expenses-table tbody td.actions a button,
+.users-table tbody td.actions button,
+.users-table tbody td.actions a button {
+    min-width: 80px;
+    text-align: center;
+}
+
+.expenses-table tbody td.status select {
+    height: 32px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.9rem;
+    min-width: 100px;
+}
+
+.expenses-table tbody td.status button,
+.expenses-table tbody td.actions button, 
+.expenses-table tbody td.actions a button {
+    height: 32px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1;
+}
+
+.new-user-form,
+.edit-user-form, 
+.update-expense-form,
+.new-expense-form {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border: 1px solid #3F6F51;
+    border-radius: 4px;
+}
+
+.new-user-form p,
+.edit-user-form p,
+.update-expense-form p,
+.new-expense-form p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.new-user-form label,
+.edit-user-form label,
+.update-expense-form label,
+.new-expense-form label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-size: 18px;
+}
+
+.new-user-form button[type="submit"],
+.edit-user-form button[type="submit"],
+.update-expense-form button[type="submit"],
+.new-expense-form button[type="submit"] {
+    padding: 12px 24px;
+    font-size: 18px;
+    margin: 1rem auto 0 auto;
+    display: block;
+}
+
+.detail-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.detail-container h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #3F6F51;
+    font-size: 2rem;
+}
+
+.user-info {
+    margin-bottom: 2rem;
+}
+
+.user-info p {
+    margin-bottom: 1rem;
+    font-size: 18px;
+    display: flex;
+}
+
+.user-info strong {
+    font-weight: bold;
+    min-width: 140px;
+    margin-right: 1rem;
+}
+
+.detail-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.detail-actions a {
+    text-decoration: none;
+}
+
+.detail-actions button,
+.detail-actions a button {
+    min-width: 120px;
+}
+
+.detail-actions .delete-btn {
+    background: #d32f2f;
+}
+
+.detail-actions .delete-btn:hover {
+    background: #b71c1c;
 }

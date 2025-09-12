@@ -4,19 +4,25 @@
 
 {% block content %}
 
-    <p><strong>First Name:</strong> {{ user.first_name }}</p>
-    <p><strong>Last Name:</strong> {{ user.last_name }}</p>
-    <p><strong>Username:</strong> {{ user.username }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    
-    <form method="get" action="{% url 'users:edit_user' user.pk %}">
-          <button type="submit">Edit</button>
-    </form>
-    {% if request.user.role == 'admin' and not user.is_superuser and user.role != 'admin' and user.pk != request.user.pk %}
-      <form method="post" action="{% url 'users:delete_user' user.pk %}" style="display:inline">
-        {% csrf_token %}
-        <button type="submit">Delete</button>
-      </form>
-    {% endif %}
+<div class="detail-container">
+    <h1>Traveler Details</h1>
+    <div class="user-info">
+        <p><strong>First Name:</strong> {{ user.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+    </div>
+    <div class="detail-actions">
+        <form method="get" action="{% url 'users:edit_user' user.pk %}">
+              <button type="submit">Edit</button>
+        </form>
+            {% if request.user.role == 'admin' and user.role != 'admin' and user.pk != request.user.pk %}
+          <form method="post" action="{% url 'users:delete_user' user.pk %}" style="display:inline">
+            {% csrf_token %}
+            <button onclick="return confirm('Are you sure you want to delete this user?')" type="submit">Delete</button>
+          </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
 
- {% endblock %}
