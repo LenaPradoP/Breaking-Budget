@@ -9,7 +9,7 @@ from ..models import CustomUser
 
 # Helper function to check if user is admin
 def _ensure_admin(request):
-    # Allow superusers or role=admin only
+    # Allow admins only
     if not request.user.role == CustomUser.Role.ADMIN:
         raise PermissionDenied("Only admins can create users.")
 

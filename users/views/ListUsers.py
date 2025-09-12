@@ -7,7 +7,7 @@ from ..forms import UserFilterForm
 
 @login_required
 def view_users(request):
-    is_admin = request.user.is_superuser or request.user.role == "admin"
+    is_admin = request.user.role == CustomUser.Role.ADMIN
     if not is_admin:
         raise PermissionDenied("You don't have permission to see this page")
 

@@ -29,8 +29,8 @@ def edit_user(request, pk):
     if request.user.pk == user_to_edit.pk:
         form = PasswordChangeForm(user=request.user)
     elif request.user.role == CustomUser.Role.ADMIN:
-        if user_to_edit.role == CustomUser.Role.ADMIN or user_to_edit.is_superuser:
-            raise PermissionDenied("Admins cannot edit other admins or superusers.")
+        if user_to_edit.role == CustomUser.Role.ADMIN:
+            raise PermissionDenied("Admins cannot edit other admins.")
         form = AdminUserEditForm(instance=user_to_edit)
     
     context = {
@@ -61,8 +61,8 @@ def update_user(request, pk):
         return render(request, "users/edit_user.html", context)
     
     if request.user.role == CustomUser.Role.ADMIN:
-        if user_to_update.role == CustomUser.Role.ADMIN or user_to_update.is_superuser:
-            raise PermissionDenied("Admins cannot edit other admins or superusers.")
+        if user_to_update.role == CustomUser.Role.ADMIN:
+            raise PermissionDenied("Admins cannot edit other admins.")
         form = AdminUserEditForm(instance=user_to_update, data=request.POST)
         if form.is_valid():
             form.save()
