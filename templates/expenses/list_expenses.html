@@ -18,7 +18,7 @@
     {{ form.status }}
     {{ form.order_by }}
     {% if user.role == 'admin' %}
-      <label style="margin-left:8px;">
+      <label class="checkbox" style="margin-left:8px;">
         {{ form.mine }} {{ form.mine.label }}
       </label>
     {% endif %}
@@ -55,7 +55,7 @@
             {% if user.role == 'traveler' or expense.user == user %}
               <form method="post" action="{% url 'expenses:delete_expense' expense.pk %}">
                 {% csrf_token %}
-                <button type="submit">Delete</button>
+                <button onclick="return confirm('Are you sure you want to delete this expense?')" type="submit">Delete</button>
               </form>
               <a href="{% url 'expenses:edit_expense' expense.pk %}">
                 <button type="button">Edit</button>
