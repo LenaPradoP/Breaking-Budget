@@ -4,7 +4,7 @@
 
 {% block content %}
     {{ form.non_field_errors }}
-  <form action="{% url 'users:create_user' %}" method="POST">
+  <form action="{% url 'users:create_user' %}" method="POST" class="new-user-form">
     {% csrf_token %}
     <p>
         <label for="{{ form.username.id_for_label }}">Username</label>

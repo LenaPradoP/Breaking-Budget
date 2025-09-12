@@ -45,7 +45,7 @@
                   <option value="approved">Approved</option>
                   <option value="rejected">Rejected</option>
                 </select>
-                <button type="submit">Update</button>
+                <button onclick="return confirm('Are you sure you want to update this expense?')" type="submit">Update</button>
               </form>
             {% else %}
               {{ expense.get_status_display }}
