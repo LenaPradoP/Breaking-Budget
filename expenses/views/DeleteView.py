@@ -8,10 +8,6 @@ from django.contrib import messages
 def delete_expense(request, pk):
     if request.method == "POST":
         expense_to_delete = get_object_or_404( Expense, pk=pk)
-        if request.user.is_superuser:
-            expense_to_delete.delete()
-            messages.success(request, f"Expense {expense_to_delete} has been deleted")
-            return redirect('expenses:list_expenses')
         if request.user.id != expense_to_delete.user.id:
             messages.error(request, "You can only delete your own expenses.")
             return redirect('expenses:list_expenses')
