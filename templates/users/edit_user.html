@@ -9,7 +9,4 @@
         {{ form.as_p }}
         <button type="submit">Save</button>
     </form>
-    <form method="get" action="{% url 'users:user_detail' user.pk %}">
-        <button type="submit">Cancel</button>
-    </form>
   {% endblock %}
