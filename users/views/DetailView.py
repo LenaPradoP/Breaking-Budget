@@ -11,12 +11,11 @@ def user_detail(request, pk):
     # Hide superusers
     target_user = get_object_or_404(User, pk=pk, is_superuser=False)
 
-    # Allow: self, admins, or superusers viewing others
+    # Allow: self or admins viewing others
     is_self = request.user.pk == target_user.pk
     is_admin = request.user.role == User.Role.ADMIN
-    is_super = request.user.is_superuser
 
-    if is_self or is_admin or is_super:
+    if is_self or is_admin:
         context = {"user": target_user}
         return render(request, "users/detail_view.html", context)
 

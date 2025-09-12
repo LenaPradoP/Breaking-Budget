@@ -16,8 +16,8 @@ def delete_user(request, pk):
         messages.error(request, "Only admins can delete users.")
         return redirect('users:view_users')
     
-    if user_to_delete == request.user or user_to_delete.is_superuser or user_to_delete.role == CustomUser.Role.ADMIN:
-        messages.error(request, "Admins cannot delete themselves, other admins or superusers.")
+    if user_to_delete == request.user or user_to_delete.role == CustomUser.Role.ADMIN:
+        messages.error(request, "Admins cannot delete themselves, other admins.")
         return redirect('users:view_users')
     
     user_to_delete.delete()
