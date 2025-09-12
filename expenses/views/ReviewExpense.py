@@ -2,6 +2,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
+from users.models import CustomUser
 
 from ..models import Expense
 
@@ -18,15 +19,8 @@ def update_expense_status(request, pk):
         messages.error(request, "Invalid status.")
         return redirect("expenses:list_expenses")
 
-    # Superusers: can set any status
-    if request.user.is_superuser:
-        expense.status = new_status
-        expense.save(update_fields=["status"])
-        messages.success(request, f"Expense {expense.pk} set to {new_status}.")
-        return redirect("expenses:list_expenses")
-
-    # Admins: only if currently pending, and only to approved/rejected
-    if request.user.role == "admin":
+    # Admins: only if expense status is pending, and only to approved/rejected
+    if request.user.role == CustomUser.Role.ADMIN:
         if expense.status != Expense.Status.PENDING:
             messages.error(request, "Admins can only change pending expenses.")
             return redirect("expenses:list_expenses")
