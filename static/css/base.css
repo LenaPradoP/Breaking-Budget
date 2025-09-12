@@ -352,3 +352,57 @@ input[type="checkbox"] {
     margin: 1rem auto 0 auto;
     display: block;
 }
+
+.detail-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.detail-container h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #3F6F51;
+    font-size: 2rem;
+}
+
+.user-info {
+    margin-bottom: 2rem;
+}
+
+.user-info p {
+    margin-bottom: 1rem;
+    font-size: 18px;
+    display: flex;
+}
+
+.user-info strong {
+    font-weight: bold;
+    min-width: 140px;
+    margin-right: 1rem;
+}
+
+.detail-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.detail-actions a {
+    text-decoration: none;
+}
+
+.detail-actions button,
+.detail-actions a button {
+    min-width: 120px;
+}
+
+.detail-actions .delete-btn {
+    background: #d32f2f;
+}
+
+.detail-actions .delete-btn:hover {
+    background: #b71c1c;
+}

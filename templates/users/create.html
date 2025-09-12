@@ -3,8 +3,14 @@
 {% block title %}Update User{% endblock %}
 
 {% block content %}
+<div class="detail-container">
   <h1>Traveler Created</h1>
-  <p>Username: {{ user.username }}</p>
-  <p>Email: {{ user.email }}</p>
-  <p><a href="{% url 'users:new_user' %}">Create another</a></p>
+  <div class="user-info">
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+  </div>
+  <div class="detail-actions">
+    <a href="{% url 'users:new_user' %}"><button>Create another</button></a>
+  </div>
+</div>
 {% endblock %}
